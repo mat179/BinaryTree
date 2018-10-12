@@ -1,2 +1,5 @@
 
 BinaryTree/
+*.class
+*.class
+out/production/BinaryTree/ru/lanit/collections/Main.class
