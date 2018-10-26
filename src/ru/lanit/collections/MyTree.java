@@ -3,7 +3,6 @@ package ru.lanit.collections;
 import java.util.Arrays;
 
 public class MyTree<T extends Number & Comparable> {
-    //
     private MyTreeNode root;
 
     public MyTree(T[] arr) {
@@ -14,10 +13,14 @@ public class MyTree<T extends Number & Comparable> {
     private MyTreeNode getNode(T[] arr, int min, int max){
         if (min > max)
             return null;
+        //Находим средний индекс
         int index = min + (max - min)/2;
-        for(int i = min; i<index; i++){
-            if ((arr[i].compareTo(arr[index]) == 0)/*&&(i!=index)*/)
+        //если в середине массива есть повторяющиеся элементы, находим индекс самого правого из них
+        for(int i = index+1; i<=max; i++){
+            if ((arr[i].compareTo(arr[index]) == 0))
                 index = i;
+            else
+                break;
         }
 
         MyTreeNode<T> node = new MyTreeNode<>(arr[index]);
@@ -60,7 +63,6 @@ public class MyTree<T extends Number & Comparable> {
 
     public boolean contain(T key){
         return checkNode(key,root);
-
     }
 
     private boolean checkNode(T key, MyTreeNode node){
@@ -87,15 +89,10 @@ public class MyTree<T extends Number & Comparable> {
         }
         int tmp = key.compareTo(node.getKey()) == 0 ? 1:0;
 
-        //return tmp + count(key,node.getLeft()) + count(key, node.getRight());
-        if (key.compareTo(node.getKey()) >= 0) {
+        if (key.compareTo(node.getKey()) > 0) {
             return tmp+count(key,node.getRight());
         } else {
             return tmp+count(key, node.getLeft());
         }
     }
-
-
-
-
 }

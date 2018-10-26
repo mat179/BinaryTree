@@ -26,7 +26,7 @@ public class MyTreeNode<T extends  Number & Comparable> {
 
 
     public void add(T key){
-        if (key.compareTo(this.key)>=0){
+        if (key.compareTo(this.key)>0){
             if (this.right == null) {
                 this.right = new MyTreeNode(key, this);
                 return;
